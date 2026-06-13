@@ -162,7 +162,13 @@ When fixing Python files via command line:
 - Use Python string replacement for multi-line fixes
 - Download fresh file if multiple failed attempts 
   corrupted the file
+## Final Fix — Concatenate Partitions Before Reordering
 
+The vec_list contains individual partition arrays (14941 each)
+not the concatenated result (44431). Fixed by concatenating 
+all partition predictions before passing to _reorder_to_natural.
+
+Fix: np.concatenate(vec_list, axis=0) before reordering.
 ## Inference Run (Successful)
 - Started: June 13, 2026 at 10:40
 - Checkpoint: epoch 85 (best)
