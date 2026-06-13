@@ -1,3 +1,111 @@
+
+
+
+### Root Cause
+In _reorder_to_natural():
+- arr shape: (14941, 2) — partition inner node predictions
+- perm length: 44431 — one index per active grid cell
+- np.empty_like(arr) creates (14941,2) output array
+- out[perm] = arr tries to use 44431 indices on 14941 slots
+
+### Fix Applied
+```python
+# Before (buggy):
+out = np.empty_like(arr)
+out[perm] = arr
+
+# After (fixed):
+n_active = len(perm)
+if arr.ndim > 1:
+    out = np.zeros((n_active, arr.shape[1]), dtype=arr.dtype)
+else:
+    out = np.zeros(n_active, dtype=arr.dtype)
+out[perm] = arr
+```
+
+### Why This Matters
+Without fix: predictions cannot be mapped to physical 
+grid locations — visualization impossible.
+With fix: correct spatial mapping of all predictions.
+
+---
+
+## 6. Test Set Results
+[FILL AFTER INFERENCE COMPLETES]
+
+### Test Cases (seed=42)
+[FILL FROM dataset_metadata.json]
+
+### PRESSURE Metrics
+- RMSE (normalized): [FILL]
+- RMSE (bar): [FILL]
+- MAE (normalized): [FILL]
+- MAE (bar): [FILL]
+
+### SWAT Metrics
+- RMSE (normalized): [FILL]
+- RMSE: [FILL]
+- MAE (normalized): [FILL]
+- MAE: [FILL]
+
+---
+
+## 7. Failure Analysis
+[FILL AFTER VISUALIZATION]
+
+### Worst Predicted Case
+- Case: [FILL]
+- Error: [FILL]
+- Location: [FILL — near faults? specific layer?]
+- Hypothesis: [FILL]
+
+---
+
+## 8. Visualization
+[ATTACH TRUE/PRED/DIFF IMAGE]
+
+---
+
+## 9. What I Would Do With More Time
+
+1. **Longer training**: Train for 300+ epochs with 
+   lower learning rate (1e-4) to squeeze more accuracy
+
+2. **Larger model**: Increase hidden_dim from 128 to 256
+   and message passing layers from 5 to 8
+
+3. **Fault features**: Add fault multiplier values as 
+   explicit node/edge features — the model currently 
+   has no direct access to fault uncertainty values
+
+4. **Ensemble**: Train 3-5 models with different seeds
+   and average predictions for uncertainty estimates
+
+5. **Loss weighting**: Tune PRESSURE vs SWAT loss weights
+   based on physical importance and magnitude
+
+---
+
+## 10. Bonus: FNO vs X-MGN for Faulted Reservoirs
+
+Fourier Neural Operators (FNOs) work in frequency domain
+and assume regular structured grids. They would fail on
+Norne because:
+
+1. ~47 faults create Non-Neighbor Connections (NNCs)
+   breaking grid regularity FNO requires
+
+2. FNO cannot represent non-adjacent cell connections
+   which is exactly what NNCs are
+
+3. X-MGN handles NNCs as natural graph edges making it
+   inherently suited for faulted reservoirs
+
+FNO would only outperform X-MGN on:
+- Simple unfaulted reservoirs
+- Perfectly regular grids
+- Cases where frequency-domain efficiency matters more
+  than geometric flexibility
 ## Bug Fix — Inference Shape Mismatch (Detailed)
 
 ### Symptom
