@@ -704,9 +704,7 @@ class InferenceRunner:
         return np.concatenate(global_indices).astype(np.int64)
 
     @staticmethod
-  
-
-     def _reorder_to_natural(arr, perm):
+    def _reorder_to_natural(arr, perm):
         """Reorder a partition-order array into natural order: natural[perm] = arr."""
         arr = np.asarray(arr)
         n_active = len(perm)
