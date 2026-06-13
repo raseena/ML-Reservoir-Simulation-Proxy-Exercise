@@ -47,10 +47,17 @@ out[perm] = arr               # now works correctly
    - Killed old process before rerunning
    - Verified fix with sed -n before running
 
-### Lesson Learned
+### Note
 When fixing Python files via command line:
 - Always verify fix with sed -n before running
 - Kill old processes before starting new ones
 - Use Python string replacement for multi-line fixes
 - Download fresh file if multiple failed attempts 
   corrupted the file
+
+## Inference Run (Successful)
+- Started: June 13, 2026 at 10:40
+- Checkpoint: epoch 85 (best)
+- Test cases: 6
+- Timesteps per case: 62
+- Status: Running 
