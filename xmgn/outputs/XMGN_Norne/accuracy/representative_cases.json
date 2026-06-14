@@ -1,0 +1,21 @@
+{
+  "cases": [
+    "NORNE_018",
+    "NORNE_008",
+    "NORNE_048",
+    "NORNE_048",
+    "NORNE_041",
+    "NORNE_016",
+    "NORNE_041",
+    "NORNE_016",
+    "NORNE_002"
+  ],
+  "annotations": {
+    "NORNE_018": "BEST",
+    "NORNE_008": "BEST",
+    "NORNE_048": "MEDIAN",
+    "NORNE_041": "WORST",
+    "NORNE_016": "WORST",
+    "NORNE_002": "WORST"
+  }
+}
