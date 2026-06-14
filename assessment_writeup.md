@@ -4,7 +4,12 @@ Repository: https://github.com/raseena/ML-Reservoir-Simulation-Proxy-Exercise
 Submission Date**: June 13, 2026  
 1. Environment Setup
  1.1 Hardware & Software
-   <img width="615" height="472" alt="image" src="https://github.com/user-attachments/assets/a05deaa8-8e08-463e-9fe1-3f9f5574cd2b" />
+
+
+
+
+   
+<img width="560" height="400" alt="image" src="https://github.com/user-attachments/assets/3b12242a-4c51-49af-9e54-1927207ac451" />
 
   
 
