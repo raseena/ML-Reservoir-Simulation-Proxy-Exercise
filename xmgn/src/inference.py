@@ -576,12 +576,16 @@ class InferenceRunner:
                 perm = None
             if perm is not None:
                 for ts, vec_list in case_results[case_name]["predictions"].items():
+                    import numpy as _np
+                    concatenated = _np.concatenate(vec_list, axis=0)
                     case_results[case_name]["predictions"][ts] = [
-                        self._reorder_to_natural(arr, perm) for arr in vec_list
+                        self._reorder_to_natural(concatenated, perm)
                     ]
                 for ts, vec_list in case_results[case_name]["targets"].items():
+                    import numpy as _np
+                    concatenated = _np.concatenate(vec_list, axis=0)
                     case_results[case_name]["targets"][ts] = [
-                        self._reorder_to_natural(arr, perm) for arr in vec_list
+                        self._reorder_to_natural(concatenated, perm)
                     ]
 
             # Save THIS case's HDF5 immediately, then free its in-memory data
@@ -704,18 +708,7 @@ class InferenceRunner:
         return np.concatenate(global_indices).astype(np.int64)
 
     @staticmethod
-   """def _reorder_to_natural(arr, perm):
-        """Reorder a partition-order array into natural order: natural[perm] = arr."""
-        arr = np.asarray(arr)
-        n_active = len(perm)
-        if arr.ndim > 1:
-            out = np.zeros((n_active, arr.shape[1]), dtype=arr.dtype)
-        else:
-            out = np.zeros(n_active, dtype=arr.dtype)
-        out[perm] = arr
-        return out """
-
-     def _reorder_to_natural(arr, perm):
+    def _reorder_to_natural(arr, perm):
         """Reorder a partition-order array into natural order: natural[perm] = arr."""
         arr = np.asarray(arr)
         n_active = len(perm)
