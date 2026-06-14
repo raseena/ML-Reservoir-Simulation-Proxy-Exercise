@@ -13,7 +13,7 @@ Submission Date**: June 13, 2026
 
   
 
-### 1.2 Environment Installation
+1.2 Environment Installation
 
 PhysicsNeMo requires Python 3.10 and a CUDA-capable NVIDIA GPU. Setup followed SETUP.md using conda (Option A — no sudo required):
 
@@ -23,38 +23,38 @@ conda activate xmgn
 pip install -r requirements.txt
 ```
 
-Verification:
-### 1.3 Issues Encountered & Solutions
 
-**Issue 1 — Python Version Conflict**  
+ 1.3 Issues Encountered & Solutions
+
+Issue 1 — Python Version Conflict  
 The system had Python 3.13 but PhysicsNeMo requires 3.10 (torch 2.4.0 has no wheels for 3.12+). Solution: Created a dedicated conda environment with Python 3.10.
 
-**Issue 2 — MLflow Deprecated File Store**  
+Issue 2 — MLflow Deprecated File Store
 MLflow ≥3.4.0 deprecated the filesystem tracking store, raising `MlflowException`. Solution: Set `MLFLOW_ALLOW_FILE_STORE=true` environment variable before training and inference.
 
-**Issue 3 — Dataset Flat Layout Required**  
+Issue 3 — Dataset Flat Layout Required
 The NORNE dataset contains `INCLUDE/SUMMARY/summary.data` files that the glob pattern `**/*.DATA` picks up as fake cases, causing `FileNotFoundError`. Solution: Created a flat layout per TROUBLESHOOTING.md, copying only case-level files (`*.DATA`, `*.EGRID`, `*.INIT`, `*.UNRST`, `*.UNSMRY`, `*.SMSPEC`) to `~/data/NORNE_FLAT/`.
 
-**Issue 4 — NORNE_008 Corrupted Timestep**  
+Issue 4 — NORNE_008 Corrupted Timestep 
 Timestep 17 of NORNE_008 was unreadable (`unpack requires a buffer of 4 bytes`). The preprocessor automatically skipped it and continued — 59 usable cases out of 60.
 
-**Issue 5 — Inference Shape Mismatch Bug**  
+Issue 5 — Inference Shape Mismatch Bug  
 Inference failed with a shape mismatch error. Full details in Section 5 (Bug Fix).
 
 ---
 
-## 2. Dataset & Preprocessing
+ 2. Dataset & Preprocessing
 
-### 2.1 Dataset Description
+2.1 Dataset Description
 
-- **Source**: 60 Norne LHS cases (NORNE_001 to NORNE_060)
-- **Grid**: 46×112×22 structured grid, ~44,431 active cells
-- **Each case**: ~62 timesteps spanning ~9 years of simulated production
-- **Variables predicted**: PRESSURE (bar), SWAT (water saturation 0–1)
-- **Fault connections**: ~47 Non-Neighbor Connections (NNCs) encoding geological faults
-- **Uncertainty axis**: Fault transmissibility multipliers varied via Latin Hypercube Sampling
+Source: 60 Norne LHS cases (NORNE_001 to NORNE_060)
+Grid: 46×112×22 structured grid, ~44,431 active cells
+Each case: ~62 timesteps spanning ~9 years of simulated production
+Variables predicted: PRESSURE (bar), SWAT (water saturation 0–1)
+Fault connections: ~47 Non-Neighbor Connections (NNCs) encoding geological faults
+Uncertainty axis: Fault transmissibility multipliers varied via Latin Hypercube Sampling
 
-### 2.2 Data Split
+ 2.2 Data Split
 
 Exactly as mandated by TASK.md:
 
@@ -65,7 +65,7 @@ test_ratio:  0.1    # 6 cases
 random_seed: 42
 ```
 
-### 2.3 Preprocessing Results
+ 2.3 Preprocessing Results
 
 | Metric | Value |
 |--------|-------|
