@@ -1,27 +1,22 @@
 # Neural Reservoir Surrogate — Technical Assessment Report
-**Candidate**: Dr. Raseena Haris  
-**Institution**: Qatar University (RH17989@qu.edu.qa)  
-**Repository**: https://github.com/raseena/ML-Reservoir-Simulation-Proxy-Exercise  
-**Submission Date**: June 13, 2026  
+Candidate**: Dr. Raseena Haris  
+Repository**: https://github.com/raseena/ML-Reservoir-Simulation-Proxy-Exercise  
+Submission Date**: June 13, 2026  
+1. Environment Setup
+ 1.1 Hardware & Software
+   
+   Component Details
+ Machine 	 Dell Precision 5860 Tower 
+ OS 	 Ubuntu 24.04 LTS (WSL2 on Windows 11 Enterprise) 
+ GPU 	 NVIDIA RTX A4000 (16 GB VRAM) 
+ RAM 	 128 GB 
+ Storage 	 1.86 TB 
+ CUDA 	 12.1 
+ Driver 	 550.144.06 
+ Python 	 3.10.20 (conda environment: xmgn) 
+ PyTorch 	 2.4.0+cu121 
+ PhysicsNeMo 	 1.3.0 
 
----
-
-## 1. Environment Setup
-
-### 1.1 Hardware & Software
-
-| Component | Details |
-|-----------|---------|
-| Machine | Dell Precision 5860 Tower |
-| OS | Ubuntu 24.04 LTS (WSL2 on Windows 11 Enterprise) |
-| GPU | NVIDIA RTX A4000 (16 GB VRAM) |
-| RAM | 128 GB |
-| Storage | 1.86 TB |
-| CUDA | 12.1 |
-| Driver | 550.144.06 |
-| Python | 3.10.20 (conda environment: xmgn) |
-| PyTorch | 2.4.0+cu121 |
-| PhysicsNeMo | 1.3.0 |
 
 ### 1.2 Environment Installation
 
